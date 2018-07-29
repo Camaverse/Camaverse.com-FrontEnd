@@ -4,10 +4,13 @@
         <img class="broadcaster-thumb" :src="item.images.broadcasterGrid" alt="" v-if="loadImgs" />
       </div>
       <div class="broadcaster-name">
-        <small><sub>
-          <span v-if="!item.isAway">{{item.status}}</span>
-          <span v-else>Away</span>
-        </sub></small><br>
+        <small>
+          <sub>
+            <span v-if="!item.isAway">{{item.status}}</span>
+            <span v-else>Away</span>
+          </sub>
+        </small>
+        <br>
         {{item.username}}
       </div>
       <div class="broadcaster-details inner">
@@ -17,7 +20,9 @@
               {{item.username}}
             </router-link>
           </h3>
-          <p class="broadcaster-quote">{{item.topic}}</p>
+          <p class="broadcaster-quote">
+            <abbr :title="item.topic">{{item.topic}}</abbr>
+          </p>
           <broadcaster-tag-list :tags="item.tags" v-on:loadTag="loadTag"></broadcaster-tag-list>
         </div>
       </div>
@@ -75,6 +80,10 @@
     right: 0;
   }
 
+  .broadcaster-details.inner {
+    overflow: hidden;
+  }
+
   .status-offline:before  {
     background: rgba(0,0,0, 0.6);
   }
@@ -99,6 +108,7 @@
   }
   .broadcaster-quote {
     margin: 0;
+    overflow: hidden;
   }
 
   .broadcaster-name {
@@ -137,8 +147,8 @@
   }
 
   .isOffline .broadcaster-thumb{
-    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(90%);
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
   }
 
   .broadcaster-grid-item:hover .broadcaster-thumb-container,
