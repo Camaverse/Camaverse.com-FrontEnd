@@ -1,6 +1,6 @@
 <template>
   <div class="broadcaster-grid-item">
-      <div class="broadcaster-thumb-container">
+      <div class="broadcaster-thumb-container" :class="{isOffline: !item.show}">
         <img class="broadcaster-thumb" :src="item.images.broadcasterGrid" alt="" v-if="loadImgs" />
       </div>
       <div class="broadcaster-name">
@@ -12,8 +12,11 @@
       </div>
       <div class="broadcaster-details inner">
         <div class="broadcaster-info">
-          <span>{{item.status}}</span>
-          <h3 class="broadcaster-username"><router-link :to="'/watch/' + item.slug">{{item.username}}</router-link></h3>
+          <h3 class="broadcaster-username">
+            <router-link :to="'/watch/' + item.slug">
+              {{item.username}}
+            </router-link>
+          </h3>
           <p class="broadcaster-quote">{{item.topic}}</p>
           <broadcaster-tag-list :tags="item.tags" v-on:loadTag="loadTag"></broadcaster-tag-list>
         </div>
@@ -131,6 +134,11 @@
     -o-object-fit: cover;
     object-fit: cover;
     background: #000;
+  }
+
+  .isOffline .broadcaster-thumb{
+    -webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(90%);
   }
 
   .broadcaster-grid-item:hover .broadcaster-thumb-container,
