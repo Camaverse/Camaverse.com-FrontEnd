@@ -11,7 +11,7 @@
     <h3 v-if="!items.length && actualTags">
       There are no brodcasters tagged "{{actualTags}}".
     </h3>
-    <div class="broadcaster-grid" v-if="items.length">
+    <div class="broadcaster-grid">
       <div class="broadcaster-grid-inner">
         <broadcaster-grid-item :item="item" :index="index" v-for="(item, index) in items" :key="item.slug" v-on:loadTag="loadBroadcasters"></broadcaster-grid-item>
       </div>
@@ -160,8 +160,8 @@
       }
     },
     mounted () {
-      this.loadBroadcasters()
       this.container = this.$el.querySelector('.broadcaster-grid-inner')
+      this.loadBroadcasters()
     }
   }
 </script>
