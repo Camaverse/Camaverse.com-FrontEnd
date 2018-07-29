@@ -129,17 +129,22 @@
         }
       },
       setData (list, tags) {
-        this.items = list.docs
-        this.limit = list.limit
-        this.offset = list.offset
-        this.page = list.page
-        this.pages = list.pages
-        this.total = list.total
+        this.items = list.online.docs.concat((list.offline && list.offline.docs) || [])
+        this.limit = list.online.limit
+        this.offset = list.online.offset
+        this.page = list.online.page
+        this.pages = list.online.pages
+        this.total = list.online.total
 
         this.itemsMap = []
-        if (list.docs && list.docs.length) {
-          for (let i = 0; i < list.docs.length; i++) {
-            this.itemsMap[list.docs[i].slug] = i
+        if (list.online.docs && list.online.docs.length) {
+          for (let i = 0; i < list.online.docs.length; i++) {
+            this.itemsMap[list.online.docs[i].slug] = i
+          }
+        }
+        if (list.offline && list.offline.docs && list.offline.docs.length) {
+          for (let i = 0; i < list.offline.docs.length; i++) {
+            this.itemsMap[list.offline.docs[i].slug] = i
           }
         }
 
